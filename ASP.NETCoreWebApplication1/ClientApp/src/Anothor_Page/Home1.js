@@ -36,7 +36,8 @@ import Pngtree from '../image/Pngtree.png'
          console.log('Dropped files', e.dataTransfer.files);
      },
  };*/
-function Home1(props){
+function Home1(props){ 
+    /*2*/
     const [getdata,setGetdata]=useState();
     const [ingredients,setIngredients]=useState()
     const[number,setNumber]=useState(5)
