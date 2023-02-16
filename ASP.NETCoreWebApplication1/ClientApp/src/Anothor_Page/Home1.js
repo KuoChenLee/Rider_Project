@@ -1,14 +1,11 @@
-import {Container, Navbar, Col, Row,Modal} from "react-bootstrap";
+import {Container, Col, Row,Modal} from "react-bootstrap";
 import React, {useEffect, useState} from 'react';
-import useInterval from 'use-interval'
 import '../App.css';
-import apple2 from '../image/apple2.jpg'
 import ImgCrop from 'antd-img-crop';
-import { SearchOutlined,AudioOutlined ,LoadingOutlined, PlusOutlined,InboxOutlined ,ArrowRightOutlined} from '@ant-design/icons';
-import {  Button, Tooltip, Space  ,Input,message, Upload,Card,Radio,Spin} from "antd"
-import p1 from '../image/Home1_img.jpg'
+import {ArrowRightOutlined} from '@ant-design/icons';
+import {  Button,  Space  , Upload,Card,Radio,Spin} from "antd"
 import Pngtree from '../image/Pngtree.png'
-
+import L_Data from '../Language.json';
 // import Texty from 'rc-texty';
 // import 'rc-texty/assets/index.css';
 // import MealList from './MealLIst'
@@ -38,11 +35,13 @@ import Pngtree from '../image/Pngtree.png'
  };*/
 function Home1(props){ 
     /*2*/
+    
+    
     const [getdata,setGetdata]=useState();
     const [ingredients,setIngredients]=useState()
     const[number,setNumber]=useState(5)
     const [recipe,setRecipe]=useState([])
-    // const [id,setId]=useState(null)
+    
     const [cook_method,setCook_method]=useState([])
     const [show, setShow] = useState(false);
     const [url,setUrl]=useState()
@@ -52,14 +51,7 @@ function Home1(props){
     const [step_equipment,set_Step_Equipment]=useState([])
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [fileList, setFileList] = useState([
-       /* {
-            uid: '-1',
-            name: 'image.png',
-            status: 'done',
-            url: '',
-        },*/
-    ]);
+    const [fileList, setFileList] = useState([]);
     const onChange = ({ fileList: newFileList }) => {
         setFileList(newFileList);
     };
@@ -115,11 +107,14 @@ function Home1(props){
 
     // 輸入食材
     function handlechange(e){
-        setIngredients(e.target.value)
+        let searchdataa=e.target.value;
+        setIngredients(searchdataa)
     }
+    
     // 輸入數字
     function handlechange2(e){
         setNumber(e.target.value);
+        
     }
     // 輸入材料ID得到API的食譜數據
     async function recipemessage(recipeid){
@@ -224,14 +219,14 @@ function Home1(props){
             </div>
         )
     }
-    // https://spoonacular.com/productImages/{ID}-{SIZE}.{TYPE}
+   
 
 
     // 得到關鍵字食譜
 
     async function getrecipe(){
-
-        let Recipe=await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=${ingredients}&number=${number}&ignorePantry=true`)
+        let DDD=L_Data[0][ingredients];
+        let Recipe=await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=${DDD}&number=${number}&ignorePantry=true`)
         let jsonrecipe=await Recipe.json();
         console.log(jsonrecipe)
         const Recipess=await Promise.all(jsonrecipe.map(async(i)=>{
@@ -362,7 +357,7 @@ function Home1(props){
                     <section className="controls">
                         <input
                             type="string"
-                            placeholder="search recipe"
+                            placeholder="搜尋料理（食材）"
                             onChange={handlechange}/>
 
                     </section>
@@ -375,17 +370,14 @@ function Home1(props){
                        <Radio.Button value={20} onChange={handlechange2}>20</Radio.Button>
                    </Radio.Group>
                </Row>
-
-                    {/*<button onClick={()=>random_recipe_card()}>Click me!</button>*/}
                     <br/>
-                <Row>
-                    {/*<Button onClick={()=>getrecipe()} className="btn-59">Get Daily meal</Button>*/}
-                    <Button type="primary" loading={loadings[0]} onClick={() => enterLoading(0)}>
-                        Get Daily meal
-                    </Button>
-                </Row>
+                    <button className="Getrecipe"  loading={loadings[0]} onClick={() => enterLoading(0)}>
+                        取得食譜
+                    </button> 
+                    
+                
                     <br/>
-
+                    
                 </div>
                 <Row className={"justify-content-md-center"}>
                 {
@@ -415,7 +407,7 @@ function Home1(props){
             <br/>
             <Container>
                 <p className="p">Must No Be Bad~</p>
-                <button onClick={()=>populateWeatherData()}>Click</button>
+                {/*<button onClick={()=>populateWeatherData()}>Click</button>*/}
             </Container>
             <br/>
 

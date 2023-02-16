@@ -25,8 +25,8 @@ function App() {
                             <NavbarBrand to="/"><h1  className='title1'>AI Kitchen</h1></NavbarBrand>
                             <Link className='text1' to="/Home1" ><button className='btn-87'>Home</button></Link>
                             <Link className='text1' to="/Home2" ><button className='btn-87'>Recipe</button></Link>
-                            <Link className='text1' to="/Home3" ><button className='btn-87'>About</button></Link>
-                            <Link className='text1' to="/Home4" ><button className='btn-87'>Instruction</button></Link>
+                            {/*<Link className='text1' to="/Home3" ><button className='btn-87'>About</button></Link>
+                            <Link className='text1' to="/Home4" ><button className='btn-87'>Instruction</button></Link>*/}
                         </Container>
 
 
@@ -38,8 +38,7 @@ function App() {
                         {/* 路徑處理 */}
                         <Route exact path="*"  element={<Home1 API_KEY={API_KEY}/>}/>
                         <Route path="/Home2" element={<Home2/>} />
-                        <Route path="/Home3" element={<Home3/>} />
-                        <Route path="/Home4" element={<Home4/>} />
+                        
                     </Routes>
                 </Router>
 

@@ -669,3 +669,19 @@
 .Modal_outside{
   backdrop-filter: blur(10px);
 }
+.Getrecipe{
+  background-color:brown;
+  border-radius: 5%;
+  color:white;
+}
+.Getrecipe:hover{
+  border-radius: 50%;
+  background-color: #e1ee72;
+  color:brown;
+  transform: translateY(-6px);
+  box-shadow: 2px 2px 6px 2px RoyalBlue;
+}
+.Getrecipe:active {
+  transform: translateY(-6px) scale(.98);
+}
+
